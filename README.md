@@ -134,5 +134,5 @@ starost podataka.
 
 ## Literatura
 
-* fedesoriano, *Heart Failure Prediction Dataset*, Kaggle, 2021.
+* *Heart Failure Prediction Dataset*, Kaggle, 2021.
 * Izvodi sa predavanja i vežbi
