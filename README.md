@@ -2,7 +2,7 @@
 
 Teodora Danilović 4004/2025 i Nina Petković 4005/2025
 
-## O čemu se radi
+## Opis projekta
 
 Cilj je da se na osnovu jedanaest kliničkih pokazatelja, koji se prikupljaju na
 rutinskom kardiološkom pregledu, predvidi da li pacijent ima srčano oboljenje.
@@ -29,13 +29,11 @@ medijanom i dodali binarni atribut `Cholesterol_izmeren`. Ispostavilo se da i
 sama činjenica da merenje nedostaje nosi informaciju, jer je među tim
 pacijentima 88.4% bolesnih naspram 47.7% u ostatku skupa.
 
-## Kako smo radili
+## Tok rada
 
 **Pretprocesiranje.** Nule u kolonama `Cholesterol` i `RestingBP` nisu
 fiziološki moguće, pa smo ih zamenili medijanom izmerenih vrednosti i dodali
-indikator `Cholesterol_izmeren`. Kategoričke atribute smo transformisali funkcijom
-`pd.get_dummies()`, čime se dobija 16 atributa, a numeričke standardizovali
-klasom `StandardScaler`. Objekat `scaler` se uči isključivo nad skupom za
+indikator `Cholesterol_izmeren`. Kategoričke atribute smo transformisali, čime se dobija 16 atributa, a numeričke standardizovali. Objekat `scaler` se uči isključivo nad skupom za
 treniranje, a nad validacionim i test skupom se već naučena transformacija samo
 primenjuje.
 
@@ -56,7 +54,7 @@ tačnost, preciznost, odziv, F1 meru i AUC.
 Poredili smo logističku regresiju, SVM sa RBF kernelom, KNN, slučajne šume,
 AdaBoost, XGBoost i potpuno povezanu neuronsku mrežu. Svaki algoritam je
 napravljen u dve varijante, bez ikakve kontrole složenosti i sa regularizacijom
-čiji su metaparametri izabrani pretragom po rešetki.
+čiji su metaparametri izabrani pretragom.
 
 Regularizacija kod svakog modela znači nešto drugo: `l2` kazna nad
 koeficijentima kod logističke regresije, `C` i `gamma` kod SVM-a, broj suseda
@@ -98,7 +96,7 @@ tačnost 0.875.
 neuronske mreže, uporedili smo na skupu za testiranje od 184 instance koji
 ranije nije korišćen.
 
-Najbolji je SVM sa regularizacijom, sa F1 merom 0.886 i tačnošću 0.870, a
+Jedan od boljih je SVM sa regularizacijom, sa F1 merom 0.886 i tačnošću 0.870, a
 odmah do njega su AdaBoost sa regularizacijom (0.883) i neuronska mreža
 (0.882). Najgori je SVM bez regularizacije, sa F1 merom 0.830.
 
@@ -120,7 +118,7 @@ pragu 0.3 odziv je 0.931, ali preciznost pada na 0.798.
 ## Zaključak
 
 Regularizacija je neophodna, ali koliko donosi zavisi od modela. Najviše
-dobijaju fleksibilni modeli koji se bez nje preprilagode, a najmanje logistička
+dobijaju modeli koji se bez nje preprilagode, a najmanje logistička
 regresija koja je i sama dovoljno jednostavna. Najbolje se to vidi po tome što
 su i najbolji i najgori model isti algoritam, SVM, a razlikuje ih samo
 regularizacija. Kod neuronske mreže je izbor arhitekture bio važniji od same regularizacije.
